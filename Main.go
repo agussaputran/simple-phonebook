@@ -8,10 +8,10 @@ type Phone struct {
 }
 
 func main() {
-	var inputMenu, inputSubMenu string
-	// var contactName, contactNumber, contactEmail string
+	var inputMenu, inputSubMenu, inputNameSementara, inputNumberSementara string
 	var contact Phone
 	var contactBook = []Phone{}
+
 	for {
 		menu()
 		fmt.Scanln(&inputMenu)
@@ -48,6 +48,19 @@ func main() {
 				fmt.Println()
 				fmt.Println("Anda Masuk Pilihan UPDATE NOMOR TELEPON")
 				fmt.Println()
+				fmt.Print("Masukkan nama : ")
+				fmt.Scanln(&inputNameSementara)
+				fmt.Print("Masukkan nomor : ")
+				fmt.Scanln(&inputNumberSementara)
+
+				for i := 0; i < len(contactBook); i++ {
+					if contactBook[i].name == inputNameSementara {
+						contactBook[i].number = inputNumberSementara
+					} else {
+						fmt.Println("No Data")
+					}
+				}
+				break
 			}
 		} else if inputMenu == "3" {
 			for {
