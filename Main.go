@@ -50,17 +50,29 @@ func main() {
 				fmt.Println()
 				fmt.Print("Masukkan nama : ")
 				fmt.Scanln(&inputNameSementara)
-				fmt.Print("Masukkan nomor : ")
-				fmt.Scanln(&inputNumberSementara)
+
+				noData := false
+
+				if inputNameSementara == "!" {
+					break
+				}
 
 				for i := 0; i < len(contactBook); i++ {
 					if contactBook[i].name == inputNameSementara {
+						fmt.Print("Masukkan nomor : ")
+						fmt.Scanln(&inputNumberSementara)
 						contactBook[i].number = inputNumberSementara
+						noData = false
+						break
 					} else {
-						fmt.Println("No Data")
+						noData = true
 					}
 				}
-				break
+
+				if noData == true {
+					fmt.Println("NAMA TIDAK ADA")
+				}
+
 			}
 		} else if inputMenu == "3" {
 			for {
