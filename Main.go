@@ -1,10 +1,30 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"regexp"
+)
+
+// var checkName = regexp.MustCompile(`^[a-zA-Z]+$`).MatchString
 
 // Phone example
 type Phone struct {
 	name, number, email string
+}
+
+func checkName(name string) bool {
+	matchString, _ := regexp.MatchString(`^[a-zA-Z]+$`, name)
+	return matchString
+}
+
+func checkNumber(number string) bool {
+	matchString, _ := regexp.MatchString(`^[\d]+$`, number)
+	return matchString
+}
+
+func checkEmail(email string) bool {
+	matchString, _ := regexp.MatchString("^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", email)
+	return matchString
 }
 
 func main() {
@@ -25,12 +45,33 @@ func main() {
 			fmt.Println("Anda Masuk Pilihan INPUT NOMOR TELEPON")
 			fmt.Println()
 			for {
+
 				fmt.Print("Masukkan Nama Anda : ")
 				fmt.Scanln(&contact.name)
+				if len(contact.name) < 5 || !checkName(contact.name) {
+					fmt.Println()
+					fmt.Println("nama salah")
+					fmt.Println()
+					break
+				}
+
 				fmt.Print("Masukkan nomor anda : ")
 				fmt.Scanln(&contact.number)
+				if len(contact.number) < 10 || !checkNumber(contact.number) {
+					fmt.Println()
+					fmt.Println("number salah")
+					fmt.Println()
+					break
+				}
+
 				fmt.Print("Masukkan email anda : ")
 				fmt.Scanln(&contact.email)
+				if checkEmail(contact.email) == false {
+					fmt.Println()
+					fmt.Println("email : ", contact.email, " tidak valid")
+					fmt.Println()
+					break
+				}
 				contactBook = append(contactBook, contact)
 				fmt.Println()
 				fmt.Print("Apakah anda ingin keluar ? jika YA ketikkan '!' jika tidak ketikkan apapun")
@@ -42,6 +83,7 @@ func main() {
 					fmt.Println()
 					continue
 				}
+
 			}
 		} else if inputMenu == "2" {
 			for {
