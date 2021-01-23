@@ -8,7 +8,7 @@ import (
 // Global var
 var contact Phone
 var contactBook = []Phone{}
-var inputNameSementara, inputNumberSementara string
+var inputMenu, inputSubMenu, inputNameSementara, inputNumberSementara string
 
 // Phone example
 type Phone struct {
@@ -31,7 +31,6 @@ func checkEmail(email string) bool {
 }
 
 func main() {
-	var inputMenu, inputSubMenu string
 
 	for {
 		menu()
@@ -55,18 +54,7 @@ func main() {
 			fmt.Println()
 			updateContact()
 		} else if inputMenu == "3" {
-			for {
-				fmt.Println()
-				fmt.Println("Anda Masuk Pilihan LIST NOMOR TELEPON")
-				fmt.Println()
-				fmt.Println(contactBook)
-				fmt.Print("Masukkan '!' Untuk kembali ke menu : ")
-				fmt.Scanln(&inputSubMenu)
-				if inputSubMenu == "!" {
-					fmt.Println()
-					break
-				}
-			}
+			contactList()
 		} else {
 			fmt.Println()
 			fmt.Println("Masukkan pilihan yang benar")
@@ -173,4 +161,16 @@ func updateContact() {
 		}
 		break
 	}
+}
+
+func contactList() {
+	fmt.Println()
+	fmt.Println(contactBook)
+	fmt.Println()
+	// fmt.Print("Masukkan '!' Untuk kembali ke menu : ")
+	// fmt.Scanln(&inputSubMenu)
+	// if inputSubMenu == "!" {
+	// 	fmt.Println()
+	// 	menu()
+	// }
 }
