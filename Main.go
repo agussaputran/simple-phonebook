@@ -5,7 +5,9 @@ import (
 	"regexp"
 )
 
-// var checkName = regexp.MustCompile(`^[a-zA-Z]+$`).MatchString
+// Global var
+var contact Phone
+var contactBook = []Phone{}
 
 // Phone example
 type Phone struct {
@@ -29,8 +31,6 @@ func checkEmail(email string) bool {
 
 func main() {
 	var inputMenu, inputSubMenu, inputNameSementara, inputNumberSementara string
-	var contact Phone
-	var contactBook = []Phone{}
 
 	for {
 		menu()
@@ -44,47 +44,51 @@ func main() {
 			fmt.Println()
 			fmt.Println("Anda Masuk Pilihan INPUT NOMOR TELEPON")
 			fmt.Println()
-			for {
+			addContactName()
+			addContactNumber()
+			addContactEmail()
+			contactBook = append(contactBook, contact)
+			// for {
 
-				fmt.Print("Masukkan Nama Anda : ")
-				fmt.Scanln(&contact.name)
-				if len(contact.name) < 5 || !checkName(contact.name) {
-					fmt.Println()
-					fmt.Println("nama salah")
-					fmt.Println()
-					break
-				}
+			// 	fmt.Print("Masukkan Nama Anda : ")
+			// 	fmt.Scanln(&contact.name)
+			// 	if len(contact.name) < 5 || !checkName(contact.name) {
+			// 		fmt.Println()
+			// 		fmt.Println("nama salah")
+			// 		fmt.Println()
+			// 		break
+			// 	}
 
-				fmt.Print("Masukkan nomor anda : ")
-				fmt.Scanln(&contact.number)
-				if len(contact.number) < 10 || !checkNumber(contact.number) {
-					fmt.Println()
-					fmt.Println("number salah")
-					fmt.Println()
-					break
-				}
+			// 	fmt.Print("Masukkan nomor anda : ")
+			// 	fmt.Scanln(&contact.number)
+			// 	if len(contact.number) < 10 || !checkNumber(contact.number) {
+			// 		fmt.Println()
+			// 		fmt.Println("number salah")
+			// 		fmt.Println()
+			// 		break
+			// 	}
 
-				fmt.Print("Masukkan email anda : ")
-				fmt.Scanln(&contact.email)
-				if checkEmail(contact.email) == false {
-					fmt.Println()
-					fmt.Println("email : ", contact.email, " tidak valid")
-					fmt.Println()
-					break
-				}
-				contactBook = append(contactBook, contact)
-				fmt.Println()
-				fmt.Print("Apakah anda ingin keluar ? jika YA ketikkan '!' jika tidak ketikkan apapun")
-				fmt.Scanln(&inputSubMenu)
-				if inputSubMenu == "!" {
-					fmt.Println()
-					break
-				} else {
-					fmt.Println()
-					continue
-				}
+			// 	fmt.Print("Masukkan email anda : ")
+			// 	fmt.Scanln(&contact.email)
+			// 	if checkEmail(contact.email) == false {
+			// 		fmt.Println()
+			// 		fmt.Println("email : ", contact.email, " tidak valid")
+			// 		fmt.Println()
+			// 		break
+			// 	}
+			// 	contactBook = append(contactBook, contact)
+			// 	fmt.Println()
+			// 	fmt.Print("Apakah anda ingin keluar ? jika YA ketikkan '!' jika tidak ketikkan apapun")
+			// 	fmt.Scanln(&inputSubMenu)
+			// 	if inputSubMenu == "!" {
+			// 		fmt.Println()
+			// 		break
+			// 	} else {
+			// 		fmt.Println()
+			// 		continue
+			// 	}
 
-			}
+			// }
 		} else if inputMenu == "2" {
 			for {
 				fmt.Println()
@@ -154,9 +158,62 @@ func menu() {
 	fmt.Print("Masukkan pilihan menu : ? ")
 }
 
-// func addContact(cName, cNumber, cEmail string) {
+func addContactName() {
+	for {
+		fmt.Println("Masukkan Nama Anda : ")
+		fmt.Scanln(&contact.name)
 
-// }
+		// if contact.name == "!"{
+		// 	menu()
+		// }
+
+		if len(contact.name) < 5 || !checkName(contact.name) {
+			fmt.Println()
+			fmt.Println("FORMAT NAMA HANYA ALPHABET dan TIDAK BOLEH KURANG dari 5")
+			fmt.Println()
+			continue
+		}
+		break
+	}
+}
+
+func addContactNumber() {
+	for {
+		fmt.Println("Masukkan Nomor Anda : ")
+		fmt.Scanln(&contact.number)
+
+		// if contact.number == "!"{
+		// 	menu()
+		// }
+
+		if len(contact.number) < 10 || !checkNumber(contact.number) {
+			fmt.Println()
+			fmt.Println("FORMAT NOMOR HANYA ANGKA DENGAN MINIMAL 10 KARAKTER")
+			fmt.Println()
+			continue
+		}
+		break
+	}
+}
+
+func addContactEmail() {
+	for {
+		fmt.Println("Masukkan Email Anda : ")
+		fmt.Scanln(&contact.email)
+
+		// if contact.email == "!"{
+		// 	menu()
+		// }
+
+		if !checkEmail(contact.email) {
+			fmt.Println()
+			fmt.Println("EMAIL YANG DIMASUKKAN TIDAK VALID")
+			fmt.Println()
+			continue
+		}
+		break
+	}
+}
 
 // func updateContact() {
 
