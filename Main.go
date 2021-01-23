@@ -17,12 +17,18 @@ type Phone struct {
 
 func checkName(name string) bool {
 	matchString, _ := regexp.MatchString(`^[a-zA-Z]+$`, name)
-	return matchString
+	if !matchString || len(name) < 5 {
+		return false
+	}
+	return true
 }
 
 func checkNumber(number string) bool {
 	matchString, _ := regexp.MatchString(`^[\d]+$`, number)
-	return matchString
+	if !matchString || len(number) < 10 {
+		return false
+	}
+	return true
 }
 
 func checkEmail(email string) bool {
@@ -31,9 +37,50 @@ func checkEmail(email string) bool {
 }
 
 func main() {
+	menu()
+	// for {
+	// 	menu()
+	// 	fmt.Scanln(&inputMenu)
+	// 	if inputMenu == "!" {
+	// 		fmt.Println()
+	// 		fmt.Println("Anda keluar dari aplikasi")
+	// 		fmt.Println()
+	// 		break
+	// 	} else if inputMenu == "1" {
+	// 		fmt.Println()
+	// 		fmt.Println("Anda Masuk Pilihan INPUT NOMOR TELEPON")
+	// 		fmt.Println()
+	// 		addContactName()
+	// 		addContactNumber()
+	// 		addContactEmail()
+	// 		contactBook = append(contactBook, contact)
+	// 	} else if inputMenu == "2" {
+	// 		fmt.Println()
+	// 		fmt.Println("Anda Masuk Pilihan UPDATE NOMOR TELEPON")
+	// 		fmt.Println()
+	// 		updateContact()
+	// 	} else if inputMenu == "3" {
+	// 		contactList()
+	// 	} else {
+	// 		fmt.Println()
+	// 		fmt.Println("Masukkan pilihan yang benar")
+	// 		fmt.Println()
+	// 		continue
+	// 	}
+	// }
+}
 
+func menu() {
 	for {
-		menu()
+		fmt.Println()
+		fmt.Println("Pilih Menu")
+		fmt.Println("1. Input nomor telepon")
+		fmt.Println("2. Update nomor telepon")
+		fmt.Println("3. List nomor telepon")
+		fmt.Println()
+		fmt.Println("Masukkan karakter '!' untuk keluar")
+		fmt.Print("Masukkan pilihan menu : ? ")
+
 		fmt.Scanln(&inputMenu)
 		if inputMenu == "!" {
 			fmt.Println()
@@ -64,16 +111,6 @@ func main() {
 	}
 }
 
-func menu() {
-	fmt.Println("Pilih Menu")
-	fmt.Println("1. Input nomor telepon")
-	fmt.Println("2. Update nomor telepon")
-	fmt.Println("3. List nomor telepon")
-	fmt.Println()
-	fmt.Println("Masukkan karakter '!' untuk keluar")
-	fmt.Print("Masukkan pilihan menu : ? ")
-}
-
 func addContactName() {
 	for {
 		fmt.Println("Masukkan Nama Anda : ")
@@ -83,7 +120,7 @@ func addContactName() {
 		// 	menu()
 		// }
 
-		if len(contact.name) < 5 || !checkName(contact.name) {
+		if !checkName(contact.name) {
 			fmt.Println()
 			fmt.Println("FORMAT NAMA HANYA ALPHABET dan TIDAK BOLEH KURANG dari 5")
 			fmt.Println()
@@ -102,7 +139,7 @@ func addContactNumber() {
 		// 	menu()
 		// }
 
-		if len(contact.number) < 10 || !checkNumber(contact.number) {
+		if !checkNumber(contact.number) {
 			fmt.Println()
 			fmt.Println("FORMAT NOMOR HANYA ANGKA DENGAN MINIMAL 10 KARAKTER")
 			fmt.Println()
@@ -144,10 +181,13 @@ func updateContact() {
 		for i := 0; i < len(contactBook); i++ {
 			if contactBook[i].name == inputNameSementara {
 				fmt.Print("Masukkan nomor : ")
+				fmt.Println()
 				fmt.Scanln(&inputNumberSementara)
-				contactBook[i].number = inputNumberSementara
 				fmt.Println("KONTAK BERHASIL DI UPDATE")
-				fmt.Println(contactBook[i])
+				fmt.Println("Nama\t\t : ", contactBook[i].name)
+				fmt.Println("Nomor sebelumnya : ", contactBook[i].number)
+				contactBook[i].number = inputNumberSementara
+				fmt.Println("Nomor Baru\t : ", contactBook[i].number)
 				noData = false
 				break
 			} else {
@@ -164,9 +204,15 @@ func updateContact() {
 }
 
 func contactList() {
-	fmt.Println()
-	fmt.Println(contactBook)
-	fmt.Println()
+	for i := 0; i < len(contactBook); i++ {
+		fmt.Println()
+		fmt.Println("Kontak ", i+1)
+		fmt.Println("Nama\t: ", contactBook[i].name)
+		fmt.Println("Nomor\t: ", contactBook[i].number)
+		fmt.Println("Email\t: ", contactBook[i].email)
+		fmt.Println()
+	}
+
 	// fmt.Print("Masukkan '!' Untuk kembali ke menu : ")
 	// fmt.Scanln(&inputSubMenu)
 	// if inputSubMenu == "!" {
