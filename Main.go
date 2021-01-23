@@ -86,10 +86,6 @@ func addContactName() {
 		fmt.Println("Masukkan Nama Anda : ")
 		fmt.Scanln(&contact.name)
 
-		// if contact.name == "!"{
-		// 	menu()
-		// }
-
 		if !checkName(contact.name) {
 			fmt.Println()
 			fmt.Println("FORMAT NAMA HANYA ALPHABET dan TIDAK BOLEH KURANG dari 5")
@@ -104,10 +100,6 @@ func addContactNumber() {
 	for {
 		fmt.Println("Masukkan Nomor Anda : ")
 		fmt.Scanln(&contact.number)
-
-		// if contact.number == "!"{
-		// 	menu()
-		// }
 
 		if !checkNumber(contact.number) {
 			fmt.Println()
@@ -124,9 +116,9 @@ func addContactEmail() {
 		fmt.Println("Masukkan Email Anda : ")
 		fmt.Scanln(&contact.email)
 
-		// if contact.email == "!"{
-		// 	menu()
-		// }
+		if contact.email == "!" {
+			menu()
+		}
 
 		if !checkEmail(contact.email) {
 			fmt.Println()
@@ -144,9 +136,9 @@ func updateContact() {
 		fmt.Scanln(&inputNameSementara)
 		noData := false
 
-		// if inputNameSementara == "!" {
-		// 	menu()
-		// }
+		if inputNameSementara == "!" {
+			menu()
+		}
 
 		for i := 0; i < len(contactBook); i++ {
 			if contactBook[i].name == inputNameSementara {
@@ -182,11 +174,4 @@ func contactList() {
 		fmt.Println("Email\t: ", contactBook[i].email)
 		fmt.Println()
 	}
-
-	// fmt.Print("Masukkan '!' Untuk kembali ke menu : ")
-	// fmt.Scanln(&inputSubMenu)
-	// if inputSubMenu == "!" {
-	// 	fmt.Println()
-	// 	menu()
-	// }
 }
