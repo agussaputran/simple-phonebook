@@ -38,36 +38,6 @@ func checkEmail(email string) bool {
 
 func main() {
 	menu()
-	// for {
-	// 	menu()
-	// 	fmt.Scanln(&inputMenu)
-	// 	if inputMenu == "!" {
-	// 		fmt.Println()
-	// 		fmt.Println("Anda keluar dari aplikasi")
-	// 		fmt.Println()
-	// 		break
-	// 	} else if inputMenu == "1" {
-	// 		fmt.Println()
-	// 		fmt.Println("Anda Masuk Pilihan INPUT NOMOR TELEPON")
-	// 		fmt.Println()
-	// 		addContactName()
-	// 		addContactNumber()
-	// 		addContactEmail()
-	// 		contactBook = append(contactBook, contact)
-	// 	} else if inputMenu == "2" {
-	// 		fmt.Println()
-	// 		fmt.Println("Anda Masuk Pilihan UPDATE NOMOR TELEPON")
-	// 		fmt.Println()
-	// 		updateContact()
-	// 	} else if inputMenu == "3" {
-	// 		contactList()
-	// 	} else {
-	// 		fmt.Println()
-	// 		fmt.Println("Masukkan pilihan yang benar")
-	// 		fmt.Println()
-	// 		continue
-	// 	}
-	// }
 }
 
 func menu() {
