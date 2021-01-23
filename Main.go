@@ -8,6 +8,7 @@ import (
 // Global var
 var contact Phone
 var contactBook = []Phone{}
+var inputNameSementara, inputNumberSementara string
 
 // Phone example
 type Phone struct {
@@ -30,7 +31,7 @@ func checkEmail(email string) bool {
 }
 
 func main() {
-	var inputMenu, inputSubMenu, inputNameSementara, inputNumberSementara string
+	var inputMenu, inputSubMenu string
 
 	for {
 		menu()
@@ -48,78 +49,11 @@ func main() {
 			addContactNumber()
 			addContactEmail()
 			contactBook = append(contactBook, contact)
-			// for {
-
-			// 	fmt.Print("Masukkan Nama Anda : ")
-			// 	fmt.Scanln(&contact.name)
-			// 	if len(contact.name) < 5 || !checkName(contact.name) {
-			// 		fmt.Println()
-			// 		fmt.Println("nama salah")
-			// 		fmt.Println()
-			// 		break
-			// 	}
-
-			// 	fmt.Print("Masukkan nomor anda : ")
-			// 	fmt.Scanln(&contact.number)
-			// 	if len(contact.number) < 10 || !checkNumber(contact.number) {
-			// 		fmt.Println()
-			// 		fmt.Println("number salah")
-			// 		fmt.Println()
-			// 		break
-			// 	}
-
-			// 	fmt.Print("Masukkan email anda : ")
-			// 	fmt.Scanln(&contact.email)
-			// 	if checkEmail(contact.email) == false {
-			// 		fmt.Println()
-			// 		fmt.Println("email : ", contact.email, " tidak valid")
-			// 		fmt.Println()
-			// 		break
-			// 	}
-			// 	contactBook = append(contactBook, contact)
-			// 	fmt.Println()
-			// 	fmt.Print("Apakah anda ingin keluar ? jika YA ketikkan '!' jika tidak ketikkan apapun")
-			// 	fmt.Scanln(&inputSubMenu)
-			// 	if inputSubMenu == "!" {
-			// 		fmt.Println()
-			// 		break
-			// 	} else {
-			// 		fmt.Println()
-			// 		continue
-			// 	}
-
-			// }
 		} else if inputMenu == "2" {
-			for {
-				fmt.Println()
-				fmt.Println("Anda Masuk Pilihan UPDATE NOMOR TELEPON")
-				fmt.Println()
-				fmt.Print("Masukkan nama : ")
-				fmt.Scanln(&inputNameSementara)
-
-				noData := false
-
-				if inputNameSementara == "!" {
-					break
-				}
-
-				for i := 0; i < len(contactBook); i++ {
-					if contactBook[i].name == inputNameSementara {
-						fmt.Print("Masukkan nomor : ")
-						fmt.Scanln(&inputNumberSementara)
-						contactBook[i].number = inputNumberSementara
-						noData = false
-						break
-					} else {
-						noData = true
-					}
-				}
-
-				if noData == true {
-					fmt.Println("NAMA TIDAK ADA")
-				}
-
-			}
+			fmt.Println()
+			fmt.Println("Anda Masuk Pilihan UPDATE NOMOR TELEPON")
+			fmt.Println()
+			updateContact()
 		} else if inputMenu == "3" {
 			for {
 				fmt.Println()
@@ -140,12 +74,6 @@ func main() {
 			continue
 		}
 	}
-
-	// if listContact[0].name == "agus" {
-	// 	fmt.Println(listContact[0])
-	// } else {
-	// 	fmt.Println("No data")
-	// }
 }
 
 func menu() {
@@ -215,6 +143,34 @@ func addContactEmail() {
 	}
 }
 
-// func updateContact() {
+func updateContact() {
+	for {
+		fmt.Print("Masukkan nama : ")
+		fmt.Scanln(&inputNameSementara)
+		noData := false
 
-// }
+		// if inputNameSementara == "!" {
+		// 	menu()
+		// }
+
+		for i := 0; i < len(contactBook); i++ {
+			if contactBook[i].name == inputNameSementara {
+				fmt.Print("Masukkan nomor : ")
+				fmt.Scanln(&inputNumberSementara)
+				contactBook[i].number = inputNumberSementara
+				fmt.Println("KONTAK BERHASIL DI UPDATE")
+				fmt.Println(contactBook[i])
+				noData = false
+				break
+			} else {
+				noData = true
+			}
+		}
+
+		if noData == true {
+			fmt.Println("NAMA TIDAK ADA")
+			continue
+		}
+		break
+	}
+}
